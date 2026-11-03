@@ -26,3 +26,6 @@ staticfiles/
 # Local backup files
 /db.sqlite3*.bak
 /requirements.txt.bak
+
+certificat_firebase.json
+*.json

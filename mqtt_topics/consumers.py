@@ -1,6 +1,6 @@
 from mqttasgi.consumers import MqttConsumer
 
-from persistence.persistence_engine import persist_mesure
+from persistence.persistence_engine import persist_mesure, persist_to_firebase
 
 class MqttTopicsConsumer(MqttConsumer):
 
@@ -24,6 +24,7 @@ class MqttTopicsConsumer(MqttConsumer):
         print(f"QoS level: {mqtt_message['qos']}")
         # persist the message to the database
         await persist_mesure(mqtt_message['payload'].decode("utf-8"))
+        await persist_to_firebase(mqtt_message['payload'].decode("utf-8"))
         # Send message to room group
         try:
             await self.channel_layer.group_send(
